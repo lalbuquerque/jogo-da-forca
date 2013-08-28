@@ -1,39 +1,57 @@
-# -*- coding: utf-8 -*-                                                        
+# -*- coding: utf-8 -*-
 import random
-                        
+import re
+
+
 class Forca():
 
     def __init__(self):
         self.lista_de_palavras = []
+        self.tamanho_palavra = 0
         self.palavra_escolhida = ''
         self.qtd_de_erros = 0
-        self.palavra_escondida = ''
-        self.alfabeto = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-                                                                              
-    def le_arquivo(self):                               
-        for palavra in open('dictionary.txt'):                                     
+        self.palavra_escondida = []
+        self.alfabeto = []
+
+    def le_arquivo(self):
+        for palavra in open('dictionary.txt'):
             self.lista_de_palavras.append(palavra[:-2])
-        return True    
+        if len(self.lista_de_palavras) > 0:
+            return True
+        else:
+            return False
 
     def define_palavra(self):
-        tamanho_palavra = raw_input('Qual o tamanho de palavra você deseja? ')
-        palavras_possiveis = [palavra for palavra in self.lista_de_palavras if len(palavra) == int(tamanho_palavra)]
+        self.tamanho_palavra = raw_input('Qual será o tamanho da palavra? ')
+        palavras_possiveis = []
+        for palavra in self.lista_de_palavras:
+            if len(palavra) == int(self.tamanho_palavra):
+                palavras_possiveis.append(palavra)
         if len(palavras_possiveis) != 0:
             self.palavra_escolhida = random.choice(palavras_possiveis)
 
     def define_qtd_erros(self):
-        self.qtd_de_erros = raw_input('Qual a quantidade erros disponiveis? ')
-        int(self.qtd_de_erros)
+        qtd = raw_input('Qual quantidade de erros disponiveis? ')
+        self.qtd_de_erros = int(qtd)
 
-    def monta_interface():        
-        pass
+    def monta_palavra_escondida(self):
+        for l in self.palavra_escolhida:
+            self.palavra_escondida.append('-')
+        print ''.join(self.palavra_escondida)
 
-    def esconde_palavra(self, palavra):
-        for l in palavra:
-            self.palavra_escondida.append('-')    
+    def exibe_alfabeto(self):
+        self.alfabeto = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
+        print ' '.join(self.alfabeto)
 
-
-
-forca = Forca()
-forca.le_arquivo()
-forca.define_palavra()
+    def coleta_escolha(self):
+        tentativa = raw_input('Escreva uma letra: ')
+        tentativa = tentativa.upper()
+        if tentativa in self.palavra_escolhida:
+            for i in re.finditer(tentativa, self.palavra_escolhida):
+                self.palavra_escondida.insert(i.start(), tentativa)
+        else:
+            #if self.qtd_de_erros == 1:
+            #print 'GAME OVER ... ... ... ...'
+            self.qtd_de_erros -= 1
+            print 'Você errou!'
+        self.alfabeto.remove(tentativa)
