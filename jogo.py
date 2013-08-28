@@ -7,12 +7,13 @@ jogo = Forca()
 if jogo.le_arquivo():
     jogo.define_palavra()
     jogo.define_qtd_erros()
+    jogo.monta_palavra_escondida()
     system('clear')
     while jogo.qtd_de_erros > 0:
         print '###########       JOGO DA FORCA        ###############'
         print
         print
-        jogo.monta_palavra_escondida()
+        jogo.mostra_palavra_escondida()
         print
         print
         jogo.exibe_alfabeto()

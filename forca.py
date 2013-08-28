@@ -37,7 +37,9 @@ class Forca():
     def monta_palavra_escondida(self):
         for l in self.palavra_escolhida:
             self.palavra_escondida.append('-')
-        print ''.join(self.palavra_escondida)
+
+    def mostra_palavra_escondida(self):
+        print '             ' + ' '.join(self.palavra_escondida)
 
     def exibe_alfabeto(self):
         self.alfabeto = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
@@ -48,10 +50,9 @@ class Forca():
         tentativa = tentativa.upper()
         if tentativa in self.palavra_escolhida:
             for i in re.finditer(tentativa, self.palavra_escolhida):
+                self.palavra_escondida.remove('-')
                 self.palavra_escondida.insert(i.start(), tentativa)
         else:
-            #if self.qtd_de_erros == 1:
-            #print 'GAME OVER ... ... ... ...'
             self.qtd_de_erros -= 1
             print 'Você errou!'
         self.alfabeto.remove(tentativa)
