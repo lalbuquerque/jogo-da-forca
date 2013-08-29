@@ -38,19 +38,21 @@ class Forca():
         for l in self.palavra_escolhida:
             self.palavra_escondida.append('-')
 
-    def mostra_palavra_escondida(self):
+    def exibe_palavra_escondida(self):
         print '             ' + ' '.join(self.palavra_escondida)
 
-    def exibe_alfabeto(self):
+    def monta_alfabeto(self):
         self.alfabeto = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
-        print ' '.join(self.alfabeto)
+
+    def exibe_alfabeto(self):
+        print ' '.join(self.alfabeto)    
 
     def coleta_escolha(self):
         tentativa = raw_input('Escreva uma letra: ')
         tentativa = tentativa.upper()
         if tentativa in self.palavra_escolhida:
             for i in re.finditer(tentativa, self.palavra_escolhida):
-                self.palavra_escondida.remove('-')
+                self.palavra_escondida.pop(i.start())
                 self.palavra_escondida.insert(i.start(), tentativa)
         else:
             self.qtd_de_erros -= 1

@@ -8,12 +8,15 @@ if jogo.le_arquivo():
     jogo.define_palavra()
     jogo.define_qtd_erros()
     jogo.monta_palavra_escondida()
+    jogo.monta_alfabeto()
     system('clear')
     while jogo.qtd_de_erros > 0:
+        print '######################################################'
         print '###########       JOGO DA FORCA        ###############'
+        print '######################################################'
         print
         print
-        jogo.mostra_palavra_escondida()
+        jogo.exibe_palavra_escondida()
         print
         print
         jogo.exibe_alfabeto()
@@ -26,4 +29,5 @@ if jogo.le_arquivo():
         continue
         if jogo.qtd_de_erros == 0:
             break
+    print 'A palavra sorteada era: %s' % jogo.palavra_escondida       
     print 'GAME OVER !!!!!!!!!!!!!!!!!!!!!!!!!!11'
