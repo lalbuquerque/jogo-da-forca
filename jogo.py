@@ -29,5 +29,5 @@ if jogo.le_arquivo():
         continue
         if jogo.qtd_de_erros == 0:
             break
-    print 'A palavra sorteada era: %s' % jogo.palavra_escondida       
+    print 'A palavra sorteada era: %s' % jogo.palavra_escolhida
     print 'GAME OVER !!!!!!!!!!!!!!!!!!!!!!!!!!11'
