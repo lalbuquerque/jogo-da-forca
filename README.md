@@ -1,4 +1,4 @@
-jogo_da_forca
+jogo-da-forca
 =============
 
 Se consiste em um jogo da forca com mais de 127 mil palavras da lingua inglesa.
